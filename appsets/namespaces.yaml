@@ -1,0 +1,66 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: namespaces
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - https://github.com/dreznicek/argo-namespace-test
+  # - https://kyverno.github.io/kyverno
+  roles:
+  # A role which provides read-only access to all applications in the project
+  - name: read-only
+    description: Read-only privileges to namespaces project
+    policies:
+    - p, proj:namespaces:read-only, applications, get, namespaces/*, allow
+    groups:
+    - namespaces
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: namespaces-components
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/dreznicek/argo-namespace-test
+      revision: HEAD
+      directories:
+      - path: "namespaces/*"
+      - path: "namespaces/base"
+        exclude: true
+  template:
+    metadata:
+      name: 'namespaces-{{path.basename}}'
+    spec:
+      project: namespaces
+      source:
+        repoURL: https://github.com/dreznicek/argo-namespace-test
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename}}'
+      syncPolicy:
+        automated:
+          selfHeal: true
+      # ignoreDifferences:
+      # - group: admissionregistration.k8s.io
+      #   kind: MutatingWebhookConfiguration
+      #   jqPathExpressions:
+      #     - '.webhooks[]?.clientConfig.caBundle'
+      # - group: admissionregistration.k8s.io
+      #   kind: ValidatingWebhookConfiguration
+      #   jqPathExpressions:
+      #     - '.webhooks[]?.clientConfig.caBundle'
