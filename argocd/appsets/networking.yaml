@@ -14,6 +14,7 @@ spec:
     server: '*'
   sourceRepos:
   - https://github.com/dreznicek/argo-namespace-test
+  - https://charts.jetstack.io
   # - https://kyverno.github.io/kyverno
   roles:
   # A role which provides read-only access to all applications in the project
