@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: controls
+  name: networking
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "1"
@@ -20,14 +20,14 @@ spec:
   - name: read-only
     description: Read-only privileges to namespaces project
     policies:
-    - p, proj:controls:read-only, applications, get, controls/*, allow
+    - p, proj:networking:read-only, applications, get, networking/*, allow
     groups:
-    - controls
+    - networking
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: controls-components
+  name: networking-components
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "2"
@@ -37,13 +37,13 @@ spec:
       repoURL: https://github.com/dreznicek/argo-namespace-test
       revision: HEAD
       directories:
-      - path: "controls/*"
+      - path: "networking/*"
         exclude: true
   template:
     metadata:
-      name: 'controls-{{path.basename}}'
+      name: 'networking-{{path.basename}}'
     spec:
-      project: controls
+      project: networking
       source:
         repoURL: https://github.com/dreznicek/argo-namespace-test
         targetRevision: HEAD
