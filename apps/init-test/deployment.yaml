@@ -56,6 +56,5 @@ spec:
             update-ca-certificates
             cp -r /etc/ssl/certs/* /artifact/
         volumeMounts:
-        - name: ca
-          mountPath: /usr/local/share/ca-certificates/ca.crt
-          subPath: ca.crt
+        - name: etc-ssl-certs
+          mountPath: /etc/ssl/certs
