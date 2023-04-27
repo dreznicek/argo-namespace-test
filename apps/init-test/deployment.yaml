@@ -27,7 +27,7 @@ spec:
             csi.cert-manager.io/dns-names: "init-test.svc.cluster.local"
       - name: ca
         secret:
-          secretName: ca-issuer
+          secretName: root-secret
       containers:
       - name: echo-service
         image: ealen/echo-server:latest
