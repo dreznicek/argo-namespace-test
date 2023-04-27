@@ -18,11 +18,11 @@ spec:
   roles:
   # A role which provides read-only access to all applications in the project
   - name: read-only
-    description: Read-only privileges to namespaces project
+    description: Read-only privileges to apps project
     policies:
     - p, proj:apps:read-only, applications, get, apps/*, allow
     groups:
-    - namespaces
+    - apps
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
