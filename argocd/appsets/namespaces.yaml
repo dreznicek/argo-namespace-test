@@ -38,7 +38,7 @@ spec:
       revision: HEAD
       directories:
       - path: "namespaces/*"
-        exclude: true
+        exclude: false
   template:
     metadata:
       name: 'namespaces-{{path.basename}}'
