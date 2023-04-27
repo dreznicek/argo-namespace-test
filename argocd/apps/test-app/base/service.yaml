@@ -1,0 +1,15 @@
+apiVersion: v1	
+kind: Service	
+metadata:	
+  name: test-app-service
+spec:	
+  # externalIPs:
+  # - 192.168.49.2
+  ports:
+  - port: 8000
+    targetPort: 8000
+  selector:	
+    app: test-app-service
+  type: LoadBalancer
+status:
+  loadBalancer: {}

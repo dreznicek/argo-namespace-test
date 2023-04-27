@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../base
+- namespace.yaml
+namePrefix: staging-
+
+patches:
+- patch: |-
+    - op: replace
+      path: /spec/rules/0/http/paths/0/path
+      value: /staging/test-app
+  target:
+    kind: Ingress
+    name: test-app-ingress
+
+namespace: staging-app-dev
