@@ -1,0 +1,14 @@
+# Add `apiserver/egress: enabled` to platform services to
+# send requests to the api server
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: apiserver-egress
+  namespace: cert-manager
+spec:
+  selector: all()
+  types:
+  - Egress
+  egress:
+  # allow all namespaces to communicate to DNS pods
+  - action: Allow

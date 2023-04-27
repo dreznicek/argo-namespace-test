@@ -1,0 +1,34 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# patchesStrategicMerge:
+# - |-
+#     apiVersion: storage.k8s.io/v1
+#     kind: CSIDriver
+#     metadata:
+#       name: csi.cert-manager.io
+#       annotations:
+#         argocd.argoproj.io/sync-wave: "1"
+
+# patchesJson6902:
+# - target:
+#     kind: DaemonSet
+#     name: .*
+#   patch: |-
+#     - op: add
+#       path: "/spec/template/spec/tolerations/-"
+#       value: 
+#         key: workload
+#         value: "true"
+#         effect: NoSchedule
+#         operator: Equal
+#     - op: add
+#       path: "/spec/template/spec/tolerations/-"
+#       value: 
+#         key: nodepool
+#         value: workload
+#         effect: NoSchedule
+#         operator: Equal
+
+resources:
+- cert-manager-csi-driver.yaml

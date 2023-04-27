@@ -1,0 +1,20 @@
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-in-namespace
+  namespace: cert-manager
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  selector: all()
+  types:
+  - Ingress
+  - Egress
+  ingress:
+  - action: Allow
+    source:
+      selector: all()
+  egress:
+  - action: Allow
+    destination:
+      selector: all()

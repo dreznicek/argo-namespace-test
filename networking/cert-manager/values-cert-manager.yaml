@@ -1,0 +1,20 @@
+global:
+  leaderElection:
+    namespace: "cert-manager"
+
+labels: &labels
+  apiserver/ingress: enabled
+  apiserver/egress: enabled
+
+podLabels: *labels
+webhook:
+  podLabels: *labels
+cainjector:
+  podLabels: *labels
+startupapicheck:
+  podLabels: *labels
+
+installCRDs: true
+
+#extraArgs:
+#- --controllers=*,-certificaterequests-approver
