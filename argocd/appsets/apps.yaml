@@ -41,7 +41,7 @@ spec:
         exclude: true
   template:
     metadata:
-      name: 'namespaces-{{path.basename}}'
+      name: 'apps-{{path.basename}}'
     spec:
       project: apps
       source:
