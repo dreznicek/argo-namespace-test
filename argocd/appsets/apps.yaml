@@ -38,7 +38,7 @@ spec:
       revision: HEAD
       directories:
       - path: "apps/*"
-        exclude: true
+        exclude: false
   template:
     metadata:
       name: 'apps-{{path.basename}}'
