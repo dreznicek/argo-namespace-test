@@ -15,11 +15,24 @@ spec:
       labels:
         app: test-app
     spec:
+      volumes:
+      - name: etc-ssl-certs
+        csi:
+          driver: csi.cert-manager.io
+          readOnly: true
+          volumeAttributes:
+            csi.cert-manager.io/fs-group: "2000"
+            csi.cert-manager.io/issuer-kind: ClusterIssuer
+            csi.cert-manager.io/issuer-name: ca-issuer
+            csi.cert-manager.io/dns-names: "init-test.svc.cluster.local"
+      - name: ca
+        mountPath: /usr/local/share/ca-certificates/ca.crt
+        subPath: ca.crt
       containers:
       - name: echo-service
         image: ealen/echo-server:latest
         args:
-         - "-text=The test has been successful!"
+          - "-text=The test has been successful!"
         resources:
           requests:
             memory: "128Mi"
@@ -29,3 +42,20 @@ spec:
             cpu: "200m"
         ports:
         - containerPort: 8000
+      initContainers:
+      - name: ca-certificates
+        image: ubuntu:latest
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            set -eux
+            apt-get update
+            apt-get install -y ca-certificates
+            mkdir -p /etc/ssl/certs
+            cp /usr/local/share/ca-certificates/* /etc/ssl/certs/
+            update-ca-certificates
+            cp -r /etc/ssl/certs/* /artifact/
+        volumeMounts:
+        - name: ca
+          secret:
+            secretName: ca-issuer

@@ -5,5 +5,5 @@ commonLabels:
   category: namespaces
 
 resources:
- - appdev/
+ - apps/
  - networking/
