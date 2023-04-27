@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test-app-deployment
+  name: init-test-deployment
   labels:
-    app: test-app
+    app: init-test
 spec:
   replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: test-app
+      app: init-test
   template:
     metadata:
       labels:
-        app: test-app
+        app: init-test
     spec:
       volumes:
       - name: etc-ssl-certs
