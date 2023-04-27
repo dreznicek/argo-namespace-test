@@ -26,8 +26,8 @@ spec:
             csi.cert-manager.io/issuer-name: ca-issuer
             csi.cert-manager.io/dns-names: "init-test.svc.cluster.local"
       - name: ca
-        mountPath: /usr/local/share/ca-certificates/ca.crt
-        subPath: ca.crt
+        secret:
+          secretName: ca-issuer
       containers:
       - name: echo-service
         image: ealen/echo-server:latest
@@ -57,5 +57,5 @@ spec:
             cp -r /etc/ssl/certs/* /artifact/
         volumeMounts:
         - name: ca
-          secret:
-            secretName: ca-issuer
+          mountPath: /usr/local/share/ca-certificates/ca.crt
+          subPath: ca.crt
