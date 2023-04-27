@@ -38,7 +38,6 @@ spec:
       revision: HEAD
       directories:
       - path: "namespaces/*"
-      - path: "namespaces/base"
         exclude: true
   template:
     metadata:
