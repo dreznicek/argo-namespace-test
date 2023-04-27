@@ -5,3 +5,4 @@ resources:
   - cert-manager.yaml
   - certs.yaml
   - csi-driver.yaml
+  - trust.yaml
