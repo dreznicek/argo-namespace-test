@@ -56,7 +56,9 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "200m"
-        
+        volumeMounts:
+        - name: etc-ssl-certs
+          mountPath: /etc/ssl/certs
         # volumeMounts:
         # - name: tmp
         #   mountPath: /etc/ssl/certs
