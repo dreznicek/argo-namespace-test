@@ -46,7 +46,8 @@ spec:
         - containerPort: 8000
       - name: ubuntu
         image: ubuntu:latest
-        command:
+        command: ["/bin/sh", "-c"]
+        args:
           - |
             set -eux
             apt-get update
