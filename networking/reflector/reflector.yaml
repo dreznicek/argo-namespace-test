@@ -10,7 +10,7 @@ spec:
     repoURL: https://emberstack.github.io/helm-charts
     # targetRevision: 1.16.1
     helm:
-      releaseName: reflector
+      releaseName: emberstack
   destination:
     server: "https://kubernetes.default.svc"
     namespace: kubeseal
