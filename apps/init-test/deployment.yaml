@@ -60,7 +60,7 @@ spec:
         volumeMounts:
         - name: ca
           configMap:
-            name: kube-root-ca-crt
+            name: kube-root-ca.crt
         - name: tmp
           mountPath: /artifact
           readOnly: false
