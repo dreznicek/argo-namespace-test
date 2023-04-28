@@ -44,6 +44,17 @@ spec:
             cpu: "200m"
         ports:
         - containerPort: 8000
+      - name: ubuntu
+        image: ubuntu:latest
+        command: ["/bin/sh", "-c"]
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        
         # volumeMounts:
         # - name: tmp
         #   mountPath: /etc/ssl/certs
