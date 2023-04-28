@@ -39,7 +39,6 @@ spec:
       revision: HEAD
       directories:
       - path: "networking/*"
-        exclude: true
   template:
     metadata:
       name: 'networking-{{path.basename}}'
