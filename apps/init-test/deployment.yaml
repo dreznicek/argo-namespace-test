@@ -97,6 +97,10 @@ spec:
             cp -r /etc/ssl/certs/* /artifact/
         volumeMounts:
         - name: ca
+          mountPath: /usr/local/share/ca-certificates/ca.crt
+          subPath: ca.crt
+          readOnly: false
+        - name: ca
           mountPath: /usr/local/share/ca-certificates/pki/ca.crt
           subPath: ca.crt
           readOnly: false
