@@ -67,6 +67,11 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "200m"
+        volumeMounts:
+        - name: ca
+          mountPath: /usr/local/share/ca-certificates/ca.crt
+          subPath: ca.crt
+          readOnly: false
         # volumeMounts:
         # - name: etc-ssl-certs
           # mountPath: /etc/ssl/certs
