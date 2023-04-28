@@ -44,32 +44,32 @@ spec:
             cpu: "200m"
         ports:
         - containerPort: 8000
-        volumeMounts:
-        - name: tmp
-          mountPath: /etc/ssl/certs
-          readOnly: false
-        - name: etc-ssl-certs
-          mountPath: /foo    
-      initContainers:
-      - name: ca-certificates
-        image: ubuntu:latest
-        command: ["/bin/sh", "-c"]
-        args:
-          - |
-            set -eux
-            apt-get update
-            apt-get install -y ca-certificates
-            mkdir -p /etc/ssl/certs
-            ls -al /usr/local/share/ca-certificates/
-            cp /usr/local/share/ca-certificates/* /etc/ssl/certs/
-            ls -al /etc/ssl/certs/
-            update-ca-certificates
-            cp -r /etc/ssl/certs/* /artifact/
-        volumeMounts:
-        - name: ca
-          mountPath: /usr/local/share/ca-certificates/ca.crt
-          subPath: ca.crt
-          readOnly: false
-        - name: tmp
-          mountPath: /artifact
-          readOnly: false
+        # volumeMounts:
+        # - name: tmp
+        #   mountPath: /etc/ssl/certs
+        #   readOnly: false
+        # - name: etc-ssl-certs
+        #   mountPath: /foo    
+      # initContainers:
+      # - name: ca-certificates
+      #   image: ubuntu:latest
+      #   command: ["/bin/sh", "-c"]
+      #   args:
+      #     - |
+      #       set -eux
+      #       apt-get update
+      #       apt-get install -y ca-certificates
+      #       mkdir -p /etc/ssl/certs
+      #       ls -al /usr/local/share/ca-certificates/
+      #       cp /usr/local/share/ca-certificates/* /etc/ssl/certs/
+      #       ls -al /etc/ssl/certs/
+      #       update-ca-certificates
+      #       cp -r /etc/ssl/certs/* /artifact/
+      #   volumeMounts:
+      #   - name: ca
+      #     mountPath: /usr/local/share/ca-certificates/ca.crt
+      #     subPath: ca.crt
+      #     readOnly: false
+      #   - name: tmp
+      #     mountPath: /artifact
+      #     readOnly: false
