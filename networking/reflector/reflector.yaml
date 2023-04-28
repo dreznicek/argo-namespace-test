@@ -6,7 +6,7 @@ metadata:
 spec:
   project: networking
   source:
-    chart: sealed-secrets
+    chart: reflector
     repoURL: https://emberstack.github.io/helm-charts
     # targetRevision: 1.16.1
     helm:
