@@ -7,5 +7,3 @@ resources:
 - cert-manager/
 - trust/
 - csi-driver/
-# - netpol/
-- calico/
