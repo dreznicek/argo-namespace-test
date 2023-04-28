@@ -7,3 +7,4 @@ resources:
 - cert-manager/
 - trust/
 - csi-driver/
+- reflector/
