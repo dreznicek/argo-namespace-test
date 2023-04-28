@@ -6,6 +6,10 @@ metadata:
 spec:
   project: networking
   source:
+    helm:
+      parameters:
+      - name: image.repository
+        value: emberstack/kubernetes-reflector:w
     chart: reflector
     repoURL: https://emberstack.github.io/helm-charts
     # targetRevision: 1.16.1
