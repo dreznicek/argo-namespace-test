@@ -1,0 +1,9 @@
+# https://projectcalico.docs.tigera.io/reference/installation/api#operator.tigera.io/v1.APIServer
+# You need this to use Calico Network Policies
+apiVersion: operator.tigera.io/v1
+kind: APIServer
+metadata:
+  name: tigera-secure
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec: {}

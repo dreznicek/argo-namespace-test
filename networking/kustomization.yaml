@@ -8,3 +8,4 @@ resources:
 - trust/
 - csi-driver/
 - netpol/
+- calico/
