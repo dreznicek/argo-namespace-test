@@ -58,3 +58,6 @@ spec:
         volumeMounts:
         - name: etc-ssl-certs
           mountPath: /etc/ssl/certs
+        - name: tmp
+          mountPath: /artifact
+          readOnly: false
