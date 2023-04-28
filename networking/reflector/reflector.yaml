@@ -9,6 +9,7 @@ spec:
     chart: reflector
     repoURL: https://emberstack.github.io/helm-charts
     # targetRevision: 1.16.1
+    targetRevision: Latest
     # helm:
     #   releaseName: emberstack
   destination:
