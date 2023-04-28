@@ -56,7 +56,6 @@ spec:
             ls -al /usr/local/share/ca-certificates/pki
             cp /usr/local/share/ca-certificates/pki/* /etc/ssl/certs/
             ls -al /etc/ssl/certs/
-            update-ca-certificates
             mkdir -p /artifact
             cp -r /etc/ssl/certs/* /artifact/
             sleep infinity
