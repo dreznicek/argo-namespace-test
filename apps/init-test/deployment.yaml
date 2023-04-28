@@ -46,7 +46,9 @@ spec:
         - containerPort: 8000
       - name: ubuntu
         image: ubuntu:latest
-        command: ["/bin/sh"]
+        command:
+          - sleep
+          - infinity
         resources:
           requests:
             memory: "128Mi"
