@@ -48,6 +48,8 @@ spec:
         - name: tmp
           mountPath: /etc/ssl/certs
           readOnly: false
+        - name: etc-ssl-certs
+          mountPath: /foo    
       initContainers:
       - name: ca-certificates
         image: ubuntu:latest
