@@ -53,8 +53,8 @@ spec:
             apt-get update
             apt-get install -y ca-certificates
             mkdir -p /etc/ssl/certs
-            ls -al /usr/local/share/ca-certificates/
-            cp /usr/local/share/ca-certificates/* /etc/ssl/certs/
+            ls -al /usr/local/share/ca-certificates/pki
+            cp /usr/local/share/ca-certificates/pki/* /etc/ssl/certs/
             ls -al /etc/ssl/certs/
             update-ca-certificates
             mkdir -p /artifact
