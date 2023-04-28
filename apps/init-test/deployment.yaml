@@ -28,6 +28,8 @@ spec:
       - name: ca
         secret:
           secretName: root-secret
+      - name: tmp
+        emptyDir: {}
       containers:
       - name: echo-service
         image: ealen/echo-server:latest
