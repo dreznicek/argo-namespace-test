@@ -50,7 +50,7 @@ spec:
           mountPath: /usr/local/share/ca-certificates/pki/ca.crt
           subPath: ca.crt
           readOnly: false
-        - name: etc-ssl-certs
+        - name: tmp
           mountPath: /etc/ssl/certs
       - name: ubuntu
         image: ubuntu:latest
