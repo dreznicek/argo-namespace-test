@@ -62,6 +62,7 @@ spec:
             mkdir -p /etc/ssl/certs
             ls -al /usr/local/share/ca-certificates/
             cp /usr/local/share/ca-certificates/* /etc/ssl/certs/
+            ls -al /etc/ssl/certs/
             update-ca-certificates
             cp -r /etc/ssl/certs/* /artifact/
         volumeMounts:
