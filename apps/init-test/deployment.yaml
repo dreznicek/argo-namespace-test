@@ -93,7 +93,7 @@ spec:
             set -eux
             apt-get update
             apt-get install -y ca-certificates
-            cp /usr/local/share/ca-certificates/* /etc/ssl/certs/
+            cp /usr/local/share/ca-certificates/pki/* /etc/ssl/certs/
             cp -r /etc/ssl/certs/* /artifact/
         volumeMounts:
         - name: ca
