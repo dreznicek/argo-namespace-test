@@ -28,7 +28,7 @@ spec:
       - name: ca
         secret:
           secretName: root-secret
-      - name: tmp
+      - name: ca-copy
         emptyDir: {}
       containers:
       - name: echo-service
@@ -50,7 +50,7 @@ spec:
           mountPath: /usr/local/share/ca-certificates/pki/ca.crt
           subPath: ca.crt
           readOnly: false
-        - name: tmp
+        - name: ca-copy
           mountPath: /etc/ssl/certs
       - name: ubuntu
         image: ubuntu:latest
@@ -75,15 +75,6 @@ spec:
           mountPath: /usr/local/share/ca-certificates/pki/ca.crt
           subPath: ca.crt
           readOnly: false
-        # volumeMounts:
-        # - name: etc-ssl-certs
-          # mountPath: /etc/ssl/certs
-        # volumeMounts:
-        # - name: tmp
-        #   mountPath: /etc/ssl/certs
-        #   readOnly: false
-        # - name: etc-ssl-certs
-        #   mountPath: /foo    
       initContainers:
       - name: ca-certificates
         image: ubuntu:latest
@@ -101,10 +92,6 @@ spec:
           mountPath: /usr/local/share/ca-certificates/ca.crt
           subPath: ca.crt
           readOnly: false
-        # - name: ca
-        #   mountPath: /usr/local/share/ca-certificates/pki/ca.crt
-        #   subPath: ca.crt
-        #   readOnly: false
-        - name: tmp
+        - name: ca-copy
           mountPath: /artifact
           readOnly: false
