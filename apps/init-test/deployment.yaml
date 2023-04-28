@@ -44,6 +44,10 @@ spec:
             cpu: "200m"
         ports:
         - containerPort: 8000
+        volumeMounts:
+        - name: tmp
+          mountPath: /etc/ssl/certs
+          readOnly: false
       initContainers:
       - name: ca-certificates
         image: ubuntu:latest
