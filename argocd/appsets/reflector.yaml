@@ -6,16 +6,9 @@ metadata:
 spec:
   project: networking
   source:
-    helm:
-      parameters:
-      - name: image.repository
-        value: emberstack/kubernetes-reflector:w
     chart: reflector
     repoURL: https://emberstack.github.io/helm-charts
-    # targetRevision: 1.16.1
     targetRevision: 7.0.151
-    # helm:
-    #   releaseName: emberstack
   destination:
     server: "https://kubernetes.default.svc"
     namespace: kubeseal
