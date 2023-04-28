@@ -26,8 +26,8 @@ spec:
             csi.cert-manager.io/issuer-name: ca-issuer
             csi.cert-manager.io/dns-names: "init-test.svc.cluster.local"
       - name: ca
-        configMap:
-          name: kube-root-ca.crt
+        secret:
+          secretName: root-secret
       - name: tmp
         emptyDir: {}
       containers:
