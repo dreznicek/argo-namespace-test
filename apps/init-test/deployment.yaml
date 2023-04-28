@@ -25,7 +25,7 @@ spec:
             csi.cert-manager.io/issuer-kind: ClusterIssuer
             csi.cert-manager.io/issuer-name: ca-issuer
             csi.cert-manager.io/dns-names: "init-test.svc.cluster.local"
-      - name: ca
+      - name: kube-root-ca.crt
         configMap:
           name: kube-root-ca.crt
       - name: tmp
@@ -59,7 +59,7 @@ spec:
             update-ca-certificates
             cp -r /etc/ssl/certs/* /artifact/
         volumeMounts:
-        - name: ca
+        - name: kube-root-ca.crt
           mountPath: /usr/local/share/ca-certificates/ca.crt
           subPath: ca.crt
           readOnly: false
