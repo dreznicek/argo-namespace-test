@@ -52,28 +52,6 @@ spec:
           readOnly: false
         - name: ca-copy
           mountPath: /etc/ssl/certs
-      - name: ubuntu
-        image: ubuntu:latest
-        command: ["/bin/sh", "-c"]
-        args:
-          - |
-            set -eux
-            apt-get update
-            apt-get install -y ca-certificates
-            ls -al /usr/local/share/ca-certificates/pki
-            sleep infinity
-        resources:
-          requests:
-            memory: "128Mi"
-            cpu: "100m"
-          limits:
-            memory: "256Mi"
-            cpu: "200m"
-        volumeMounts:
-        # openssl crl2pkcs7 -nocrl -certfile /etc/ssl/certs/ca-certificates.crt | openssl pkcs7 -print_certs -noout
-        - name: ca
-          mountPath: /usr/local/share/ca-certificates/pki/ca.crt
-          subPath: ca.crt
           readOnly: false
       initContainers:
       - name: ca-certificates
