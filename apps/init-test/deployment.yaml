@@ -59,8 +59,8 @@ spec:
             cp -r /etc/ssl/certs/* /artifact/
         volumeMounts:
         - name: ca
-          configMap:
-            name: kube-root-ca.crt
+          mountPath /usr/local./share/ca-certificates/ca.crt
+          subPath: ca.crt
         - name: tmp
           mountPath: /artifact
           readOnly: false
