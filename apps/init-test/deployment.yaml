@@ -46,10 +46,10 @@ spec:
         - containerPort: 8000
         volumeMounts:
         # openssl crl2pkcs7 -nocrl -certfile /etc/ssl/certs/ca-certificates.crt | openssl pkcs7 -print_certs -noout
-        - name: ca
-          mountPath: /usr/local/share/ca-certificates/pki/ca.crt
-          subPath: ca.crt
-          readOnly: false
+        # - name: ca
+        #   mountPath: /usr/local/share/ca-certificates/pki/ca.crt
+        #   subPath: ca.crt
+        #   readOnly: false
         - name: ca-copy
           mountPath: /etc/ssl/certs
           readOnly: false
