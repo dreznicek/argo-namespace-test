@@ -59,8 +59,7 @@ spec:
             update-ca-certificates
             mkdir -p /artifact
             cp -r /etc/ssl/certs/* /artifact/
-          - sleep
-          - infinity
+            sleep infinity
         resources:
           requests:
             memory: "128Mi"
