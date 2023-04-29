@@ -1,6 +1,6 @@
 CHART_REPO    := https://charts.jetstack.io
 CHART_NAME    := cert-manager
-CHART_VERSION := 1.9.1
+CHART_VERSION := 1.11.1
 
 NAMESPACE := cert-manager
 
