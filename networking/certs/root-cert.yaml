@@ -16,6 +16,10 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
 spec:
+  secretTemplate:
+    annotations:
+      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: ""
   isCA: true
   commonName: my-selfsigned-ca
   secretName: root-secret
