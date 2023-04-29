@@ -49,6 +49,22 @@ spec:
         - name: ca-copy
           mountPath: /etc/ssl/certs
           readOnly: false
+      - name: ubuntu
+        image : ubuntu:latest
+        command: ["/bin/sh", "-c"]
+        args:
+          - sleep infinity
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        volumeMounts:
+        - name: ca-copy
+          mountPath: /etc/ssl/certs
+          readOnly: false
       initContainers:
       - name: ca-certificates
         image: ubuntu:latest
