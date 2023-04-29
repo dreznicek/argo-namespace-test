@@ -6,4 +6,4 @@ resources:
   - certs.yaml
   - csi-driver.yaml
   - trust.yaml
-  - kubeseal.yaml
+  - reflector.yaml
