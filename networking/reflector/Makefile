@@ -2,7 +2,7 @@ CHART_REPO    := https://emberstack.github.io/helm-charts
 CHART_NAME    := reflector
 CHART_VERSION := 7.0.151
 
-NAMESPACE := kubeseal
+NAMESPACE := reflector
 
 # Maintain a local inflated version of the chart
 # https://github.com/kubernetes-sigs/kustomize/blob/master/examples/chart.md#best-practice
