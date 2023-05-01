@@ -10,14 +10,13 @@ metadata:
     app.kubernetes.io/version: "v0.5.0"
     app.kubernetes.io/managed-by: Helm
   name: cert-manager-csi-driver
-  namespace: cert-manager
+  # namespace: cert-manager
 ---
 # Source: cert-manager-csi-driver/templates/clusterrole.yaml
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: cert-manager-csi-driver
-  namespace: cert-manager
   labels:
     app.kubernetes.io/name: cert-manager-csi-driver
     helm.sh/chart: cert-manager-csi-driver-v0.5.0
@@ -37,7 +36,6 @@ kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: cert-manager-csi-driver
-  namespace: cert-manager
   labels:
     app.kubernetes.io/name: cert-manager-csi-driver
     helm.sh/chart: cert-manager-csi-driver-v0.5.0
@@ -51,14 +49,12 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: cert-manager-csi-driver
-  namespace: cert-manager
 ---
 # Source: cert-manager-csi-driver/templates/daemonset.yaml
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: cert-manager-csi-driver
-  namespace: cert-manager
   labels:
     app.kubernetes.io/name: cert-manager-csi-driver
     helm.sh/chart: cert-manager-csi-driver-v0.5.0

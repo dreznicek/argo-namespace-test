@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - cert-manager.yaml
+  - cert-manager-csi-driver.yaml
   - certs.yaml
-  - csi-driver.yaml
   - trust.yaml
   - reflector.yaml
