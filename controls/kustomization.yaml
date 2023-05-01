@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- cluster-policy/
+# - cosign-webhook/ (Temp removal on 02-09-2023 for Bright testing)
+#- cosign-controller/ (These are not working)
+#- cosign-policy/ (These are not working)
+#- pod-security/
+- kyverno/
+#- reporting/

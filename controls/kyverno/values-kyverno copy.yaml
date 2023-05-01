@@ -1,0 +1,21 @@
+replicaCount: 4
+podLabels:
+  aadpodidbinding: image-puller
+  apiserver/ingress: enabled
+  apiserver/egress: enabled
+
+resources:
+  # -- Pod resource limits
+  limits:
+    cpu: 1
+    memory: 2Gi
+  # -- Pod resource requests
+  requests:
+    cpu: 500m
+    memory: 1Gi
+
+#- "--imagePullSecrets=acr-creds"
+extraArgs:
+- "--webhookTimeout=25"
+- "--admissionReports=false"
+- "--backgroundScan=false"

@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+patches:
+- patch: |-
+    - op: add
+      path: /metadata/annotations/argocd.argoproj.io~1sync-options
+      value: Replace=true
+  target:
+    kind: CustomResourceDefinition
+
+# The Open Telemetry agent uses this
+commonLabels:
+  cluster: CLUSTER_NAME
+  category: kyverno
+
+resources:
+- kyverno.yaml

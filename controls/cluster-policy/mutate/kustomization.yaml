@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- inject-certs.yaml
+# - always-pull-images.yaml
+# - apply-pss-restricted-profile.yaml
+# - add-ttl-jobs.yaml
+# - sync-acr-creds.yaml
+#- daemonset-tolerations.yaml
+# - record-creation-details.yaml

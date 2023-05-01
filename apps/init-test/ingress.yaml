@@ -19,3 +19,7 @@ spec:
               name: test-app-service
               port:
                 number: 8000
+  tls:
+    hosts:
+    - init-test.svc.cluster.loca
+    secretName: root-secret
