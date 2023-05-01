@@ -28,6 +28,9 @@ rules:
 - apiGroups: ["cert-manager.io"]
   resources: ["certificaterequests"]
   verbs: ["watch", "create", "delete", "list"]
+- apiGroups: ["*v1.cert-manager.io"]
+  resources: ["certificaterequests"]
+  verbs: ["watch", "create", "delete", "list"]
 ---
 # Source: cert-manager-csi-driver/templates/clusterrolebinding.yaml
 kind: ClusterRoleBinding
