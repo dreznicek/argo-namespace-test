@@ -5,25 +5,29 @@ kind: ServiceAccount
 metadata:
   labels:
     app.kubernetes.io/name: cert-manager-csi-driver
-    helm.sh/chart: cert-manager-csi-driver-v0.4.2
+    helm.sh/chart: cert-manager-csi-driver-v0.5.0
     app.kubernetes.io/instance: cert-manager-csi-driver
-    app.kubernetes.io/version: "v0.4.0"
+    app.kubernetes.io/version: "v0.5.0"
     app.kubernetes.io/managed-by: Helm
   name: cert-manager-csi-driver
+  # namespace: cert-manager
 ---
 # Source: cert-manager-csi-driver/templates/clusterrole.yaml
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
+  name: cert-manager-csi-driver
   labels:
     app.kubernetes.io/name: cert-manager-csi-driver
-    helm.sh/chart: cert-manager-csi-driver-v0.4.2
+    helm.sh/chart: cert-manager-csi-driver-v0.5.0
     app.kubernetes.io/instance: cert-manager-csi-driver
-    app.kubernetes.io/version: "v0.4.0"
+    app.kubernetes.io/version: "v0.5.0"
     app.kubernetes.io/managed-by: Helm
-  name: cert-manager-csi-driver
 rules:
 - apiGroups: ["cert-manager.io"]
+  resources: ["certificaterequests"]
+  verbs: ["watch", "create", "delete", "list"]
+- apiGroups: ["*v1.cert-manager.io"]
   resources: ["certificaterequests"]
   verbs: ["watch", "create", "delete", "list"]
 ---
@@ -31,13 +35,13 @@ rules:
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
+  name: cert-manager-csi-driver
   labels:
     app.kubernetes.io/name: cert-manager-csi-driver
-    helm.sh/chart: cert-manager-csi-driver-v0.4.2
+    helm.sh/chart: cert-manager-csi-driver-v0.5.0
     app.kubernetes.io/instance: cert-manager-csi-driver
-    app.kubernetes.io/version: "v0.4.0"
+    app.kubernetes.io/version: "v0.5.0"
     app.kubernetes.io/managed-by: Helm
-  name: cert-manager-csi-driver
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -45,7 +49,6 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: cert-manager-csi-driver
-  namespace: cert-manager
 ---
 # Source: cert-manager-csi-driver/templates/daemonset.yaml
 apiVersion: apps/v1
@@ -54,11 +57,10 @@ metadata:
   name: cert-manager-csi-driver
   labels:
     app.kubernetes.io/name: cert-manager-csi-driver
-    helm.sh/chart: cert-manager-csi-driver-v0.4.2
+    helm.sh/chart: cert-manager-csi-driver-v0.5.0
     app.kubernetes.io/instance: cert-manager-csi-driver
-    app.kubernetes.io/version: "v0.4.0"
+    app.kubernetes.io/version: "v0.5.0"
     app.kubernetes.io/managed-by: Helm
-    allnode: "true"
 spec:
   selector:
     matchLabels:
@@ -107,7 +109,7 @@ spec:
             capabilities:
               add: ["SYS_ADMIN"]
             allowPrivilegeEscalation: true
-          image: "quay.io/jetstack/cert-manager-csi-driver:v0.4.0"
+          image: "quay.io/jetstack/cert-manager-csi-driver:v0.5.0"
           imagePullPolicy: IfNotPresent
           args :
             - --log-level=1
@@ -144,7 +146,8 @@ spec:
           resources:
             {}
 
-      tolerations: []
+      tolerations:
+        []
 
       volumes:
         - name: plugin-dir
@@ -171,9 +174,9 @@ metadata:
   name: csi.cert-manager.io
   labels:
     app.kubernetes.io/name: cert-manager-csi-driver
-    helm.sh/chart: cert-manager-csi-driver-v0.4.2
+    helm.sh/chart: cert-manager-csi-driver-v0.5.0
     app.kubernetes.io/instance: cert-manager-csi-driver
-    app.kubernetes.io/version: "v0.4.0"
+    app.kubernetes.io/version: "v0.5.0"
     app.kubernetes.io/managed-by: Helm
 spec:
   podInfoOnMount: true

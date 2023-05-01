@@ -1,6 +1,6 @@
 CHART_REPO    := https://charts.jetstack.io
 CHART_NAME    := cert-manager-csi-driver
-CHART_VERSION := 0.4.2
+CHART_VERSION := 0.5.0
 
 NAMESPACE := cert-manager
 
