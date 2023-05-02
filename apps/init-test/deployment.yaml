@@ -93,7 +93,8 @@ spec:
             openssl crl2pkcs7 -nocrl -certfile /etc/ssl/certs/ca-certificates.crt | openssl pkcs7 -print_certs -noout | grep my-self
         volumeMounts:
         - name: ca
-          mountPath: /usr/local/share/ca-certificates/ca.crt
+          # mountPath: /usr/local/share/ca-certificates/ca.crt
+          mountPath: /etc/ssl/certs
           subPath: ca.crt
           readOnly: false
         - name: ca-copy
