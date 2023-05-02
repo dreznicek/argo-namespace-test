@@ -1,13 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: test-app-ingress
+  name: init-test-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
     # nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    # nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - init-test.svc.cluster.local
+    secretName: root-secret
   rules: 
   - host: minikube.test
     http:
@@ -18,8 +23,13 @@ spec:
             service:
               name: test-app-service
               port:
-                number: 8000
-  tls:
-    hosts:
-    - init-test.svc.cluster.loca
-    secretName: root-secret
+                number: 443
+    http:
+      paths:
+        - path: /test-app
+          pathType: Prefix
+          backend:
+            service:
+              name: test-app-service
+              port:
+                number: 443

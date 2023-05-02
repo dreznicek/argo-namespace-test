@@ -31,6 +31,20 @@ spec:
       - name: ca-copy
         emptyDir: {}
       containers:
+      - name: nginx
+        image: nginx:latest
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 9443
+        volumeMounts:
+        - name: etc-ssl-certs
+          mountPath: /etc/ssl/certs
       - name: echo-service
         image: ealen/echo-server:latest
         args:
