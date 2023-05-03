@@ -69,25 +69,25 @@ spec:
         - name: ca
           mountPath: /usr/local/share/ca-certificates/ca.crt
           subPath: ca.crt
-      # - name: ubuntu
-      #   image : ubuntu:latest
-      #   command: ["/bin/sh", "-c"]
-      #   args:
-      #     - sleep infinity
-      #   resources:
-      #     requests:
-      #       memory: "128Mi"
-      #       cpu: "100m"
-      #     limits:
-      #       memory: "256Mi"
-      #       cpu: "200m"
-      #   volumeMounts:
-      #   - name: ca-copy
-      #     mountPath: /etc/ssl/certs
-      #     readOnly: false
-      #   - name: ca
-      #     mountPath: /usr/local/share/ca-certificates/ca.crt
-      #     subPath: ca.crt
+      - name: ubuntu
+        image : ubuntu:latest
+        command: ["/bin/sh", "-c"]
+        args:
+          - sleep infinity
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        volumeMounts:
+        - name: ca-copy
+          mountPath: /etc/ssl/certs
+          readOnly: false
+        - name: ca
+          mountPath: /usr/local/share/ca-certificates/ca.crt
+          subPath: ca.crt
       initContainers:
       - name: ca-certificates
         image: ubuntu:latest
