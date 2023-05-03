@@ -14,22 +14,13 @@ spec:
     - init-test.svc.cluster.local
     secretName: root-secret
   rules: 
-  - host: minikube.test
+  - host: init-test.svc.cluster.local
     http:
       paths:
         - path: /test-app
           pathType: Prefix
           backend:
             service:
-              name: test-app-service
-              port:
-                number: 443
-    http:
-      paths:
-        - path: /test-app
-          pathType: Prefix
-          backend:
-            service:
-              name: test-app-service
+              name: init-test-app-service
               port:
                 number: 443
