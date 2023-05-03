@@ -11,13 +11,13 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - init-test.svc.cluster.local
-    secretName: init-test-ingress-cert
+    - app.init-test.svc.cluster.local
+    secretName: app-init-test-ingress-cert
   rules: 
-  - host: init-test.svc.cluster.local
+  - host: app.init-test.svc.cluster.local
     http:
       paths:
-        - path: /init-test-app
+        - path: /
           pathType: Prefix
           backend:
             service:
