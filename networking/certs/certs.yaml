@@ -1,0 +1,37 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: argocd-cert
+spec:
+  secretName: argocd-server-tls
+  dnsNames:
+  - argocd-server.argocd.svc.cluster.local
+  - argocd-server.argocd.svc.cluster
+  - argocd-server.argocd.svc
+  - argocd-server.argocd
+  - argocd-server
+  uris:
+    - spiffe://cluster.local/ns/argocd/sa/argocd-server
+  issuerRef:
+    name: ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: argocd-repo-cert
+spec:
+  secretName: argocd-repo-server-tls
+  dnsNames:
+  - argocd-repo-server.argocd.svc.cluster.local
+  - argocd-repo-server.argocd.svc.cluster
+  - argocd-repo-server.argocd.svc
+  - argocd-repo-server.argocd
+  - argocd-repo-server
+  uris:
+    - spiffe://cluster.local/ns/argocd/sa/argocd-repo-server
+  issuerRef:
+    name: ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io

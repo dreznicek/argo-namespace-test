@@ -17,7 +17,7 @@ spec:
   - host: init-test.svc.cluster.local
     http:
       paths:
-        - path: /test-app
+        - path: /init-test-app
           pathType: Prefix
           backend:
             service:
