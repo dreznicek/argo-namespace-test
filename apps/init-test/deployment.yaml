@@ -49,6 +49,9 @@ spec:
         image: ealen/echo-server:latest
         args:
           - "-text=The test has been successful!"
+        environment:
+          - name: PORT
+            value: "8080"
         resources:
           requests:
             memory: "128Mi"
