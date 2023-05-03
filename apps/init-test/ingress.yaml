@@ -12,7 +12,7 @@ spec:
   tls:
   - hosts:
     - init-test.svc.cluster.local
-    secretName: root-secret
+    secretName: init-test-ingress-cert
   rules: 
   - host: init-test.svc.cluster.local
     http:
