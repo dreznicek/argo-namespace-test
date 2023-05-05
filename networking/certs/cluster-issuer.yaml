@@ -4,4 +4,5 @@ metadata:
   name: ca-issuer
 spec:
   ca:
-    secretName: root-secret
+    # secretName: root-secret
+    secretName: originations-ca
