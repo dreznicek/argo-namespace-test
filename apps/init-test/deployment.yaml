@@ -47,8 +47,8 @@ spec:
           mountPath: /etc/ssl/certs
       - name: echo-service
         image: ealen/echo-server:latest
-        args:
-          - "-text=The test has been successful!"
+        ports:
+        - containerPort: 8080
         env:
           - name: PORT
             value: "8080"
@@ -59,8 +59,6 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "200m"
-        ports:
-        - containerPort: 8080
         volumeMounts:
         # openssl crl2pkcs7 -nocrl -certfile /etc/ssl/certs/ca-certificates.crt | openssl pkcs7 -print_certs -noout
         - name: ca-copy
