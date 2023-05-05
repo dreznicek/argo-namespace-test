@@ -16,112 +16,114 @@ spec:
         app: init-test
     spec:
       volumes:
-      - name: etc-ssl-certs
-        csi:
-          driver: csi.cert-manager.io
-          readOnly: true
-          volumeAttributes:
-            csi.cert-manager.io/fs-group: "2000"
-            csi.cert-manager.io/issuer-kind: ClusterIssuer
-            csi.cert-manager.io/issuer-name: ca-issuer
-            csi.cert-manager.io/dns-names: "init-test.svc.cluster.local"
-      - name: ca
-        secret:
-          secretName: root-secret
-      - name: ca-copy
-        emptyDir: {}
-      containers:
-      - name: nginx
-        image: nginx:latest
-        resources:
-          requests:
-            memory: "128Mi"
-            cpu: "100m"
-          limits:
-            memory: "256Mi"
-            cpu: "200m"
-        ports:
-        - containerPort: 9443
-        volumeMounts:
         - name: etc-ssl-certs
-          mountPath: /etc/ssl/certs
-      - name: echo-service
-        image: ealen/echo-server:latest
-        ports:
-        - containerPort: 8080
-        env:
-          - name: PORT
-            value: "8080"
-        resources:
-          requests:
-            memory: "128Mi"
-            cpu: "100m"
-          limits:
-            memory: "256Mi"
-            cpu: "200m"
-        volumeMounts:
-        # openssl crl2pkcs7 -nocrl -certfile /etc/ssl/certs/ca-certificates.crt | openssl pkcs7 -print_certs -noout
-        - name: ca-copy
-          mountPath: /etc/ssl/certs
-          readOnly: false
+          csi:
+            driver: csi.cert-manager.io
+            readOnly: true
+            volumeAttributes:
+              csi.cert-manager.io/fs-group: "2000"
+              csi.cert-manager.io/issuer-kind: ClusterIssuer
+              csi.cert-manager.io/issuer-name: ca-issuer
+              csi.cert-manager.io/dns-names: "init-test.svc.cluster.local"
         - name: ca
-          mountPath: /usr/local/share/ca-certificates/ca.crt
-          subPath: ca.crt
-      # - name: ubuntu
-      #   image : ubuntu:latest
-      #   command: ["/bin/sh", "-c"]
-      #   args:
-      #     - sleep infinity
-      #   resources:
-      #     requests:
-      #       memory: "128Mi"
-      #       cpu: "100m"
-      #     limits:
-      #       memory: "256Mi"
-      #       cpu: "200m"
-      #   volumeMounts:
-      #   - name: ca-copy
-      #     mountPath: /etc/ssl/certs
-      #     readOnly: false
-      #   - name: ca
-      #     mountPath: /usr/local/share/ca-certificates/ca.crt
-      #     subPath: ca.crt
-      - name: netshoot
-        image : nicolaka/netshoot:latest
-        command: ["/bin/sh", "-c"]
-        args:
-          - sleep infinity
-        resources:
-          requests:
-            memory: "128Mi"
-            cpu: "100m"
-          limits:
-            memory: "256Mi"
-            cpu: "200m"
-        volumeMounts:
+          secret:
+            secretName: root-secret
         - name: ca-copy
-          mountPath: /etc/ssl/certs
-          readOnly: false
-        - name: ca
-          mountPath: /usr/local/share/ca-certificates/ca.crt
-          subPath: ca.cr
+          emptyDir: {}
+      containers:
+        - name: nginx
+          image: nginx:latest
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+          ports:
+            - containerPort: 9443
+          volumeMounts:
+            - name: etc-ssl-certs
+              mountPath: /etc/ssl/certs
+            - name: nginx-conf
+              mountPath: /etc/nginx/conf.d
+        - name: echo-service
+          image: ealen/echo-server:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+          volumeMounts:
+            # openssl crl2pkcs7 -nocrl -certfile /etc/ssl/certs/ca-certificates.crt | openssl pkcs7 -print_certs -noout
+            - name: ca-copy
+              mountPath: /etc/ssl/certs
+              readOnly: false
+            - name: ca
+              mountPath: /usr/local/share/ca-certificates/ca.crt
+              subPath: ca.crt
+        # - name: ubuntu
+        #   image : ubuntu:latest
+        #   command: ["/bin/sh", "-c"]
+        #   args:
+        #     - sleep infinity
+        #   resources:
+        #     requests:
+        #       memory: "128Mi"
+        #       cpu: "100m"
+        #     limits:
+        #       memory: "256Mi"
+        #       cpu: "200m"
+        #   volumeMounts:
+        #   - name: ca-copy
+        #     mountPath: /etc/ssl/certs
+        #     readOnly: false
+        #   - name: ca
+        #     mountPath: /usr/local/share/ca-certificates/ca.crt
+        #     subPath: ca.crt
+        - name: netshoot
+          image: nicolaka/netshoot:latest
+          command: ["/bin/sh", "-c"]
+          args:
+            - sleep infinity
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+          volumeMounts:
+            - name: ca-copy
+              mountPath: /etc/ssl/certs
+              readOnly: false
+            - name: ca
+              mountPath: /usr/local/share/ca-certificates/ca.crt
+              subPath: ca.cr
       initContainers:
-      - name: ca-certificates
-        image: ubuntu:latest
-        command: ["/bin/sh", "-c"]
-        args:
-          - |
-            set -eux
-            apt-get update
-            apt-get install -y ca-certificates
-            # cp /usr/local/share/ca-certificates/* /etc/ssl/certs/
-            cp -r /etc/ssl/certs/* /artifact/
-            openssl crl2pkcs7 -nocrl -certfile /etc/ssl/certs/ca-certificates.crt | openssl pkcs7 -print_certs -noout | grep my-self
-        volumeMounts:
-        - name: ca
-          mountPath: /usr/local/share/ca-certificates/ca.crt
-          subPath: ca.crt
-          readOnly: false
-        - name: ca-copy
-          mountPath: /artifact
-          readOnly: false
+        - name: ca-certificates
+          image: ubuntu:latest
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              set -eux
+              apt-get update
+              apt-get install -y ca-certificates
+              # cp /usr/local/share/ca-certificates/* /etc/ssl/certs/
+              cp -r /etc/ssl/certs/* /artifact/
+              openssl crl2pkcs7 -nocrl -certfile /etc/ssl/certs/ca-certificates.crt | openssl pkcs7 -print_certs -noout | grep my-self
+          volumeMounts:
+            - name: ca
+              mountPath: /usr/local/share/ca-certificates/ca.crt
+              subPath: ca.crt
+              readOnly: false
+            - name: ca-copy
+              mountPath: /artifact
+              readOnly: false
