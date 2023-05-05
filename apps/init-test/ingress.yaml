@@ -14,7 +14,7 @@ spec:
     - svc.cluster.local
     secretName: app-init-test-ingress-cert
   rules: 
-  - host: app.init-test.svc.cluster.local
+  - host: svc.cluster.local
     http:
       paths:
         - path: /init-test-ingress
