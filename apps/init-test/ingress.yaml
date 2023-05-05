@@ -11,10 +11,10 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - svc.cluster.local
-    secretName: app-init-test-ingress-cert
+    - host.k3d.internal
+    secretName: host.k3d.internal
   rules: 
-  - host: svc.cluster.local
+  - host: host.k3d.internal
     http:
       paths:
         - path: /init-test-ingress
