@@ -30,6 +30,9 @@ spec:
             secretName: root-secret
         - name: ca-copy
           emptyDir: {}
+        - configMap:
+            name: init-test-nginx-conf
+          name: init-test-nginx-conf
       containers:
         - name: nginx
           image: nginx:latest
