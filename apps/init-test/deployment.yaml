@@ -48,7 +48,7 @@ spec:
           volumeMounts:
             - name: etc-ssl-certs
               mountPath: /etc/ssl/certs
-            - name: nginx-conf
+            - name: init-test-nginx-conf
               mountPath: /etc/nginx/conf.d
         - name: echo-service
           image: ealen/echo-server:latest
