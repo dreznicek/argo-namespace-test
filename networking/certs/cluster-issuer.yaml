@@ -2,7 +2,9 @@ apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: ca-issuer
+  namespace: cert-manager
 spec:
   ca:
     # secretName: root-secret
-    secretName: originations-ca
+    # secretName: originations-ca
+    secretName: my-root-cert
