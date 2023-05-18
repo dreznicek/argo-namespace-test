@@ -27,7 +27,7 @@ spec:
               csi.cert-manager.io/dns-names: "init-test.svc.cluster.local"
         - name: ca
           secret:
-            secretName: root-secret
+            secretName: my-root-cert
         - name: ca-copy
           emptyDir: {}
         - configMap:
