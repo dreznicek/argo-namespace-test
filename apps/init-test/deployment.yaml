@@ -116,7 +116,7 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - |
-              ENV TERM linux
+              export TERM=linux
               set -eux
               apt-get update
               apt-get install -y ca-certificates
