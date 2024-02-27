@@ -7,6 +7,8 @@ metadata:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/rewrite-target: /$1
     cert-manager.io/cluster-issuer: ca-issuer
+    csi.cert-manager.io/duration: 300s
+    csi.cert-manager.io/renew-before: 180s
 spec:
   ingressClassName: nginx
   tls:
