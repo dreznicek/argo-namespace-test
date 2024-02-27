@@ -25,7 +25,8 @@ spec:
               csi.cert-manager.io/issuer-kind: ClusterIssuer
               csi.cert-manager.io/issuer-name: ca-issuer
               csi.cert-manager.io/dns-names: "init-test.svc.cluster.local"
-              csi.cert-manager.io/duration: "5m"
+              csi.cert-manager.io/duration: 300s
+              csi.cert-manager.io/renew-before: 180s
         - name: ca
           secret:
             secretName: my-root-cert
